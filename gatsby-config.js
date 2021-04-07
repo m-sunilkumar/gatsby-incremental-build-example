@@ -1,7 +1,5 @@
 module.exports = {
   plugins: [
-  
-    { resolve: "gatsby-theme-event" },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
