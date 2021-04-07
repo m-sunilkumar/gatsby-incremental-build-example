@@ -1,0 +1,44 @@
+name: gatsby-sample-site
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: windows-2019
+    name: Build
+    steps:
+      - uses: actions/checkout@v2
+      - name: Yarn cache directory
+        id: yarn-cache-dir
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+      - name: Gatsby Cache Folder
+        uses: actions/cache@v1
+        with:
+          key: gatsby-cache-folder
+          path: .cache
+      - name: Gatsby Public Folder
+        uses: actions/cache@v1
+        with:
+          key: gatsby-public-folder
+          path: public
+      - name: Yarn cache
+        uses: actions/cache@v1
+        with:
+          path: ${{ steps.yarn-cache-dir.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+      - name: Yarn install
+        run: "yarn install --pure-lockfile"
+      - name: Build app
+        run: "yarn run build"
+        env:
+          # incremental builds
+          # https://www.gatsbyjs.org/docs/page-build-optimizations-for-incremental-data-changes/
+          GATSBY_EXPERIMENTAL_PAGE_BUILD_ON_DATA_CHANGES: true
+          CI: true
+          CONTENTFUL_SPACE_ID: ${{ secrets.CONTENTFUL_SPACE_ID }}
+          CONTENTFUL_ACCESS_TOKEN: ${{ secrets.CONTENTFUL_ACCESS_TOKEN }}
