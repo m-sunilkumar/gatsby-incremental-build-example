@@ -6,7 +6,7 @@ export default function About(props) {
     <>
       {" "}
       {/* <ThemePage /> */}
-      <h1>Hello guys . this is about page 111</h1>
+      <h1>Hello guys . this is about page</h1>
     </>
   );
 }
