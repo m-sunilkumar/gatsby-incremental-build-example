@@ -6,7 +6,7 @@ export default function Menu(props) {
   console.log("propsssssssss", props);
   return (
     <div>
-      <h1>Hello, from the menu!</h1>
+      <h1>Hello, from the menu...........!</h1>
       {data.allContentfulNavbarThemeItems.nodes.map(
         (item) => item.menuItemText + " ,"
       )}
