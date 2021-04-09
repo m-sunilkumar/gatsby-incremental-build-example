@@ -4,6 +4,11 @@ on:
   push:
     branches:
       - master
+      
+name: Eleventy Build on Contentful Publish Event
+on:
+	repository_dispatch:
+    	types: [publish-event]
 
 jobs:
   deploy:
