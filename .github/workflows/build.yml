@@ -1,11 +1,6 @@
 name: gatsby-sample-site with contentful
 
 on:
-  push:
-    branches:
-      - master
-
-on:
   repository_dispatch:
     types: [publish-event]
 
